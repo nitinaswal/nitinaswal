@@ -1,8 +1,8 @@
-name: Generate Stats
+name: Generate Vercel-Style Stats
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Daily at midnight UTC
+    - cron: "0 0 * * *" # Runs daily at midnight UTC
   workflow_dispatch:
 
 permissions:
@@ -15,21 +15,21 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # Generate Main GitHub Stats (like Vercel)
+      # Generate GitHub Stats Card
       - name: Generate GitHub Stats
         run: |
-          curl "https://github-readme-stats.vercel.app/api?username=nitinaswal&show_icons=true&theme=radical" -o github-stats.svg
+          curl -o github-stats.svg "https://github-readme-stats.vercel.app/api?username=nitinaswal&show_icons=true&theme=radical"
 
-      # Generate Top Languages (like Vercel)
-      - name: Generate Languages Stats
+      # Generate Top Languages Card
+      - name: Generate Top Languages
         run: |
-          curl "https://github-readme-stats.vercel.app/api/top-langs/?username=nitinaswal&layout=compact&theme=radical" -o top-langs.svg
+          curl -o top-langs.svg "https://github-readme-stats.vercel.app/api/top-langs/?username=nitinaswal&layout=compact&theme=radical"
 
-      # Commit and push
+      # Commit and push the cards
       - name: Commit files
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add github-stats.svg top-langs.svg
-          git commit -m "Update GitHub stats cards" || echo "No changes to commit"
+          git commit -m "Update Vercel-style GitHub stats" || echo "No changes to commit"
           git push
