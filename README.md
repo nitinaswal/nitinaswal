@@ -45,6 +45,17 @@
 
 ---
 
+
+<details>
+  <summary>📈 Full Contribution Metrics (Includes Private Repos)</summary>
+  <br>
+  <p align="center">
+    <img src="./metrics.svg" alt="Nitin's Metrics">
+  </p>
+</details>
+
+---
+
 ### 🌐 Connect With Me  
 - [LinkedIn](https://www.linkedin.com/in/nitin-aswal-62a32b250)  
 - 📧 Email:nitinaswal2002@gmail.com
