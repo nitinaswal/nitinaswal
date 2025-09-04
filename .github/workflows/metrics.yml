@@ -1,35 +1,42 @@
-name: Generate Vercel-Style Stats
+name: Generate Metrics
 
 on:
   schedule:
     - cron: "0 0 * * *" # Runs daily at midnight UTC
-  workflow_dispatch:
+  workflow_dispatch: # Allows manual trigger
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  github-metrics:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # Generate GitHub Stats Card
-      - name: Generate GitHub Stats
-        run: |
-          curl -o github-stats.svg "https://github-readme-stats.vercel.app/api?username=nitinaswal&show_icons=true&theme=radical"
+      - name: Generate metrics
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: nitinaswal
+          template: classic
+          base: header, activity, community, repositories, metadata
+          config_timezone: Asia/Kolkata
+          plugin_isocalendar: yes
+          plugin_languages: yes
+          plugin_languages_ignored: html, css
+          plugin_languages_sections: most-used
+          plugin_followup: yes
+          plugin_stars: yes
+          repositories_affiliations: owner, collaborator
+          repositories_forks: yes
 
-      # Generate Top Languages Card
-      - name: Generate Top Languages
-        run: |
-          curl -o top-langs.svg "https://github-readme-stats.vercel.app/api/top-langs/?username=nitinaswal&layout=compact&theme=radical"
-
-      # Commit and push the cards
-      - name: Commit files
+      - name: Commit metrics
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add github-stats.svg top-langs.svg
-          git commit -m "Update Vercel-style GitHub stats" || echo "No changes to commit"
+          git add metrics.svg
+          git commit -m "Update GitHub metrics" || echo "No changes to commit"
           git push
