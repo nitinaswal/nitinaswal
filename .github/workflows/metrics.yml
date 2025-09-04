@@ -1,52 +1,35 @@
-name: Generate Metrics
+name: Generate Stats
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Runs daily at midnight UTC
-  workflow_dispatch: # Allows manual trigger
+    - cron: "0 0 * * *" # Daily at midnight UTC
+  workflow_dispatch:
 
 permissions:
-  contents: write  # Required so the workflow can push the SVGs
+  contents: write
 
 jobs:
-  github-metrics:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Generate main stats
-        uses: lowlighter/metrics@latest
-        with:
-          filename: stats-metrics.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          user: nitinaswal
-          template: classic
-          base: header, activity, community, repositories, metadata
-          config_timezone: Asia/Kolkata
-          plugin_isocalendar: yes
-          plugin_followup: yes
-          plugin_stars: yes
+      # Generate Main GitHub Stats (like Vercel)
+      - name: Generate GitHub Stats
+        run: |
+          curl "https://github-readme-stats.vercel.app/api?username=nitinaswal&show_icons=true&theme=radical" -o github-stats.svg
 
-      - name: Generate languages stats
-        uses: lowlighter/metrics@latest
-        with:
-          filename: languages-metrics.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          user: nitinaswal
-          template: classic
-          base: ""
-          config_timezone: Asia/Kolkata
-          plugin_languages: yes
-          plugin_languages_ignored: html, css
-          plugin_languages_sections: most-used
+      # Generate Top Languages (like Vercel)
+      - name: Generate Languages Stats
+        run: |
+          curl "https://github-readme-stats.vercel.app/api/top-langs/?username=nitinaswal&layout=compact&theme=radical" -o top-langs.svg
 
-      - name: Commit metrics
+      # Commit and push
+      - name: Commit files
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
-          git add stats-metrics.svg languages-metrics.svg
-          git commit -m "Update GitHub metrics" || echo "No changes to commit"
-          git push origin main
-
+          git add github-stats.svg top-langs.svg
+          git commit -m "Update GitHub stats cards" || echo "No changes to commit"
+          git push
