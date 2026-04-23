@@ -7,10 +7,8 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=nitinaswal" alt="nitinaswal" /></a> </p>
 
-<p align="left"> <a href="https://twitter.com/" target="blank"><img src="https://img.shields.io/twitter/follow/?logo=twitter&style=for-the-badge" alt="" /></a> </p>
-
 ### 🚀 About Me
-- 🔭 Currently working with *MERN, Next.js & Cloudflare Workers*  
+- 🔭 Currently working with *PERN, Next.js & Cloudflare Workers*  
 - 🌱 Learning *PostgreSQL + Prisma ORM* and diving deeper into *AWS & Docker*  
 - 🎯 Interested in *AI, Blockchain, and Open Source*  
 - ⚡ Fun fact: I love solving problems & building end-to-end products  
