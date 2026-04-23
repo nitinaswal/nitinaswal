@@ -1,6 +1,6 @@
 # Hi 👋, I'm Nitin Aswal  
 
-💻 Full-Stack Developer | 🚀 MERN & Next.js Enthusiast | ☁ Exploring Cloud & DevOps  
+💻 Full-Stack Developer | 🚀 PERN & Next.js Enthusiast | ☁ Exploring Cloud & DevOps  
 
 ---
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=nitinaswal&label=Profile%20views&color=0e75b6&style=flat" alt="nitinaswal" /> </p>
